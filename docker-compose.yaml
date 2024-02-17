@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  dhcpd:
+    build: .
+    restart: unless-stopped
+    networks:
+      internal_network:
+        ipv4_address: <your_static_ip_address> # Should be on the same range as ipvaln subnet range
+    volumes:
+      - ./dhcpd.conf:/etc/dhcp/dhcpd.conf
+networks:
+  internal_network:
+    external:
+      name: ipvlan
